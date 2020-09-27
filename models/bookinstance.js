@@ -7,6 +7,18 @@ var Schema = mongoose.Schema({
     due_back: { type: Date, default: Date.now }
 });
 
+Schema
+    .virtual('due_back_formatted')
+    .get(function () {
+      return this.due_back && this.due_back.toLocaleDateString('ru');
+    });
+
+    Schema
+        .virtual('due_back_year_formatted')
+        .get(function () {
+          return this.due_back && this.due_back.getFullYear();
+        });
+
 // Virtual for bookinstance's URL
 Schema
     .virtual('url')

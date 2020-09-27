@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h2= title
+  
+  p.text-muted 
+    if author.date_of_birth_formatted 
+        if author.lifespan 
+            | #{author.lifespan}
+        else
+            | родился в #{author.date_of_birth_formatted}
+    
+  
+  .detail
+
+    h4 Books
+    
+    dl
+      each book in books
+        dt 
+          a(href=book.url) #{book.title}
+        dd #{book.summary}
+
+      else
+        p This author has no books.

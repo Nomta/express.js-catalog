@@ -11,7 +11,27 @@ var Schema = new mongoose.Schema({
 Schema
     .virtual('name')
     .get(function () {
+        return this.first_name + ' ' + this.family_name;
+    });
+
+Schema
+    .virtual('short_name')
+    .get(function () {
         return this.family_name + ', ' + this.first_name;
+    });
+
+Schema
+    .virtual('date_of_birth_formatted')
+    .get(function () {
+      return this.date_of_birth && this.date_of_birth.getFullYear();
+    });
+
+Schema
+    .virtual('lifespan')
+    .get(function () {
+        if (this.date_of_birth && this.date_of_death) {
+            return this.date_of_birth_formatted + ' - ' + this.date_of_death.getFullYear();
+        }
     });
 
 // Виртуальное свойство - URL автора

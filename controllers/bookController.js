@@ -1,17 +1,45 @@
 var Book = require('../models/book');
-
-exports.index = function(req, res) {
-    res.send('NOT IMPLEMENTED: Site Home Page');
-};
+var BookInstance = require('../models/bookinstance');
+var Genre = require('../models/genre');
+var async = require('async');
 
 // Display list of all books.
-exports.book_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book list');
+exports.book_list = function(req, res, next) {
+    Book.find({}, 'title author')
+      .populate('author')
+      .sort([['title', 'ascending']])
+      .exec(function (err, books) {
+        if (err) { return next(err); }
+        res.render('book_list', { title: 'Книги', books });
+    });
 };
 
 // Display detail page for a specific book.
-exports.book_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id);
+exports.book_detail = function(req, res, next) {
+
+    async.parallel({
+        book: function(callback) {
+            Book.findById(req.params.id)
+              .populate('author')
+              .populate('genre')
+              .exec(callback);
+        },
+        instances: function(callback) {
+            BookInstance
+              .find({ 'book': req.params.id })
+              .exec(callback);
+        },
+
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (!results.book) {
+            var err = new Error('Book not found');
+            err.status = 404;
+            return next(err);
+        }
+        
+        res.render('book_detail', { title: results.book.title, book: results.book, instances: results.instances });
+    });
 };
 
 // Display book create form on GET.

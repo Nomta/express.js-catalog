@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  h2= title
+  
+  .detail
+
+    h4 Books
+    
+    dl
+      each book in books
+        dt 
+          a(href=book.url) #{book.title}
+        dd #{book.summary}
+
+      else
+        p This genre has no books

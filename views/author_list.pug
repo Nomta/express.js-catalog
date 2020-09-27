@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul
+    each author in authors
+      li 
+        a(href=author.url) #{author.short_name} 
+        if author.date_of_birth_formatted
+            small.text-muted (#{author.lifespan || author.date_of_birth_formatted})
+
+    else
+      li There are no authors.

@@ -1,8 +1,97 @@
+/* reset */
+
+* {
+	box-sizing: border-box;
+}
+html, body {
+	height: 100%;
+	margin: 0;
+	text-size-adjust: none;
+	text-size-adjust: 100%;
+	touch-action: manipulation;
+}
+html {
+	font-family: sans-serif;	
+  position: relative;
+  overflow-x: hidden;
+}
+address { 
+  font-style: normal;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+a:active, a:hover { 
+	outline: 0;
+}
+button, input, select, textarea {
+	color: inherit;
+	font: inherit;
+	margin: 0;
+}
+button { 
+	overflow: visible;
+	text-transform: none;
+	background-color: transparent;
+	border: none;
+}
+button, button:active, button:focus { 
+	outline: none;
+}
+button[disabled], html input[disabled] {
+	cursor: default;
+}
+input { 
+	line-height: normal;
+}
+button, input[type="button"], input[type="reset"], input[type="submit"] { 
+	cursor: pointer;
+}
+select { 
+	text-transform: none;
+}
+fieldset, img { 
+	border: none;
+}
+ol, ul { 
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+table { 
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+td, th { 
+	padding: 0;
+}
+img { 
+	max-width: 100%;
+	vertical-align: bottom;
+	border: none;
+}
+
+/* end reset */
+
+/* project styles */
+
 body {
-  padding: 50px;
+  padding: 0 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.detail {
+	margin-top: 20px;
+	margin-left: 20px;
 }
